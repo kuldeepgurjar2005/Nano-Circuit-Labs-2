@@ -10,8 +10,9 @@ body{
   color:white;
 }
 
-/* Header */<meta name="google-site-verification" content="VB5Nnx0qfMQWm3BS42IyGBPbxVSJz7xYaM8Yp0_Agws" />
-header{
+/* Header */
+<meta name="google-site-verification" content="VB5Nnx0qfMQWm3BS42IyGBPbxVSJz7xYaM8Yp0_Agws" />
+{
   background:#020617;
   padding:15px 40px;
   display:flex;
