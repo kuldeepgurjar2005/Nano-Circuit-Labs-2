@@ -188,3 +188,43 @@ footer{
 .contact-item a:hover {
   color: #4fc3ff;
 }
+.btn {
+  background: var(--main-color);
+  color: #fff;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #0b6fd3;
+}
+.btn {
+  background: var(--main-color);
+  color: #fff;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #0b6fd3;
+}
+.btn {
+  background: var(--main-color);
+  color: #fff;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #0b6fd3;
+}
+
