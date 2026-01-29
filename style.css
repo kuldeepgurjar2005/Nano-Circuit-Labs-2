@@ -6,13 +6,13 @@
 }
 
 body{
-  background:#1e90ff;
+  background:#ffffff;
   color:white;
 }
 
 /* Header */
 header{
-  background:#020617;
+  background:#ffffff;
   padding:15px 40px;
   display:flex;
   justify-content:space-between;
@@ -59,7 +59,7 @@ nav a{
 }
 
 .btn{
-  background:#38bdf8;
+  background:#ffffff;
   color:#020617;
   padding:12px 25px;
   text-decoration:none;
