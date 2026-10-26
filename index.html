@@ -572,5 +572,69 @@ document.getElementById("contactForm").addEventListener("submit", function(event
     "mailto:" + businessEmail + "?subject=" + subject + "&body=" + body;
 });
 </script>
+  
+<style>
+.typing-text {
+  color: #50e3ff;
+  border-right: 3px solid #50e3ff;
+  padding-right: 5px;
+  animation: cursorBlink 0.7s infinite;
+}
+
+@keyframes cursorBlink {
+  50% { border-color: transparent; }
+}
+</style>
+
+<script>
+const words = [
+  "PCB Design.",
+  "Embedded Systems.",
+  "Semiconductor Innovation.",
+  "Smart Electronics."
+];
+
+let wordIndex = 0;
+let charIndex = 0;
+let deleting = false;
+
+const heading = document.querySelector(".hero h1");
+
+if (heading) {
+  const line = document.createElement("div");
+  line.style.marginTop = "8px";
+  line.style.fontSize = "clamp(24px, 3vw, 38px)";
+  line.style.letterSpacing = "-1px";
+  line.style.minHeight = "1.5em";
+  line.innerHTML = '<span class="typing-text"></span>';
+
+  heading.after(line);
+  const target = line.querySelector(".typing-text");
+
+  function typeEffect() {
+    const word = words[wordIndex];
+
+    target.textContent = word.slice(0, charIndex);
+
+    if (!deleting && charIndex < word.length) {
+      charIndex++;
+      setTimeout(typeEffect, 85);
+    } else if (!deleting) {
+      deleting = true;
+      setTimeout(typeEffect, 1400);
+    } else if (charIndex > 0) {
+      charIndex--;
+      setTimeout(typeEffect, 40);
+    } else {
+      deleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      setTimeout(typeEffect, 300);
+    }
+  }
+
+  typeEffect();
+}
+</script>
+
 </body>
 </html>
