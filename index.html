@@ -635,6 +635,59 @@ if (heading) {
   typeEffect();
 }
 </script>
+  
+<style>
+.chip {
+  transition: transform 0.15s ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .chip-scene:hover .chip {
+    box-shadow:
+      0 0 55px rgba(54,163,255,.4),
+      inset 0 0 35px rgba(54,163,255,.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip { transition: none !important; }
+}
+</style>
+
+<script>
+(() => {
+  const scene = document.querySelector(".chip-scene");
+  const chip = document.querySelector(".chip");
+
+  if (!scene || !chip) return;
+
+  const reducedMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (reducedMotion ||
+      !window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    return;
+  }
+
+  scene.addEventListener("mousemove", (event) => {
+    const rect = scene.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+    chip.style.animation = "none";
+    chip.style.transform =
+      `rotateX(${-y * 18}deg) rotateY(${x * 22}deg) rotateZ(-3deg)`;
+  });
+
+  scene.addEventListener("mouseleave", () => {
+    chip.style.transform = "";
+    chip.style.animation = "";
+  });
+})();
+</script>
+
 
 </body>
 </html>
