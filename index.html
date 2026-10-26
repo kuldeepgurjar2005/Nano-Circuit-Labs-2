@@ -286,6 +286,83 @@ footer { border-top:1px solid var(--border);padding:28px 0;color:var(--muted);fo
   }
   .reveal { opacity:1;transform:none; }
 }
+  
+.innovation-stats {
+  padding: 85px 5%;
+  background:
+    radial-gradient(ellipse at 50% 0%, #123c6144, transparent 65%),
+    #07111f;
+  border-top: 1px solid rgba(80, 180, 255, .15);
+}
+
+.stats-container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.stats-heading {
+  text-align: center;
+  margin-bottom: 38px;
+}
+
+.stats-heading span {
+  color: #50e3ff;
+  font-size: 12px;
+  letter-spacing: 3px;
+  font-weight: 800;
+}
+
+.stats-heading h2 {
+  color: #edf6ff;
+  font-size: clamp(28px, 4vw, 42px);
+  margin: 12px 0;
+  letter-spacing: -1px;
+}
+
+.stats-heading p {
+  color: #9db0c8;
+  font-size: 14px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.stat-card {
+  padding: 28px 12px;
+  text-align: center;
+  background: linear-gradient(145deg, #10263d, #0a1726);
+  border: 1px solid rgba(80, 180, 255, .2);
+  border-radius: 14px;
+  transition: transform .3s, border-color .3s, box-shadow .3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-7px);
+  border-color: #50e3ff;
+  box-shadow: 0 12px 35px #1686f922;
+}
+
+.stat-card strong {
+  display: block;
+  color: #50e3ff;
+  font-size: clamp(23px, 3vw, 34px);
+  margin-bottom: 7px;
+}
+
+.stat-card p {
+  color: #b7c9dd;
+  font-size: 12px;
+}
+
+@media (max-width: 650px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 </style>
 </head>
 
@@ -527,6 +604,21 @@ footer { border-top:1px solid var(--border);padding:28px 0;color:var(--muted);fo
         <p>Chip Technology</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="founder-section" id="founder">
+  <div class="founder-card">
+    <div class="founder-label">MEET THE FOUNDER</div>
+    <div class="founder-avatar">KG</div>
+    <h2>Kuldeep Gurjar</h2>
+    <p class="founder-role">Founder &amp; Owner</p>
+    <div class="founder-line"></div>
+    <p class="founder-bio">
+      Driving innovation in electronics, semiconductor technology,
+      embedded systems and next-generation engineering solutions.
+    </p>
+    <a href="#contact" class="founder-btn">Connect With Me ↗</a>
   </div>
 </section>
 
