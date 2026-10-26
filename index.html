@@ -1,115 +1,576 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07111f">
+<meta name="description" content="Nano Circuit Labs — PCB design, embedded systems, IoT, circuit development and semiconductor engineering solutions.">
+<title>Nano Circuit Labs | Engineering the Future</title>
 
-<title>Nano Circuit Labs | Semiconductor & Technology Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<meta name="description" content="Nano Circuit Labs provides semiconductor research, embedded systems, automation and IT solutions.">
-<meta name="keywords" content="Semiconductor, Embedded Systems, Automation, Nano Circuit Labs, Technology">
+<style>
+:root {
+  --bg: #07111f;
+  --panel: #0d1b2d;
+  --blue: #36a3ff;
+  --cyan: #50e3ff;
+  --text: #edf6ff;
+  --muted: #9db0c8;
+  --border: rgba(120,180,255,.17);
+}
 
-<link rel="stylesheet" href="style.css">
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; scroll-padding-top:90px; }
+body {
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,Arial,sans-serif;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+a { color:inherit; text-decoration:none; }
+button { font:inherit; }
+.container { width:min(1160px,90%); margin:auto; }
+section { padding:100px 0; position:relative; }
 
-<!-- AOS Animation -->
-<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+nav {
+  position:fixed; inset:0 0 auto; z-index:1000;
+  background:rgba(7,17,31,.82);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner {
+  min-height:76px; display:flex; align-items:center;
+  justify-content:space-between; gap:24px;
+}
+.logo { font-size:21px; font-weight:800; letter-spacing:-1px; }
+.logo span { color:var(--cyan); }
+.nav-links { display:flex; gap:27px; align-items:center; }
+.nav-links a { color:var(--muted); font-size:13px; transition:.25s; }
+.nav-links a:hover { color:var(--cyan); }
+.menu-btn {
+  display:none; color:white; background:none;
+  border:1px solid var(--border); border-radius:10px;
+  padding:7px 12px; cursor:pointer;
+}
+.btn {
+  display:inline-flex; justify-content:center; align-items:center;
+  gap:8px; padding:13px 21px; border-radius:9px;
+  background:linear-gradient(110deg,#1686f9,#42d8ff);
+  color:#04111e; font-size:14px; font-weight:800;
+  border:1px solid transparent; cursor:pointer;
+  transition:transform .25s,box-shadow .25s;
+}
+.btn:hover { transform:translateY(-3px); box-shadow:0 8px 35px #1686f955; }
+.btn-outline {
+  background:transparent; color:var(--text);
+  border-color:var(--border);
+}
+.btn-outline:hover { border-color:var(--blue); }
+
+.hero {
+  min-height:100vh; display:flex; align-items:center;
+  padding-top:130px; overflow:hidden;
+  background:
+    radial-gradient(ellipse at 80% 45%,#0d418544,transparent 42%),
+    radial-gradient(ellipse at 10% 20%,#164e6325,transparent 38%);
+}
+.grid-bg {
+  position:absolute; inset:0; pointer-events:none;
+  background-image:
+    linear-gradient(#6ebaff0b 1px,transparent 1px),
+    linear-gradient(90deg,#6ebaff0b 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:linear-gradient(to bottom,black,transparent 90%);
+}
+.hero-grid {
+  position:relative; display:grid;
+  grid-template-columns:1.15fr .85fr;
+  align-items:center; gap:55px;
+}
+.eyebrow {
+  display:inline-flex; gap:10px; align-items:center;
+  color:var(--cyan); font-size:12px; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase;
+  margin-bottom:23px;
+}
+.dot {
+  width:8px;height:8px;border-radius:50%;
+  background:var(--cyan); box-shadow:0 0 15px var(--cyan);
+  animation:pulse 1.7s infinite;
+}
+h1 {
+  font-size:clamp(42px,5.7vw,75px);
+  letter-spacing:-3.8px; line-height:1.08;
+  font-weight:800; margin-bottom:25px;
+}
+.gradient-text {
+  background:linear-gradient(100deg,#fff 5%,#47b5ff 50%,#70f1ff);
+  background-clip:text; -webkit-background-clip:text;
+  color:transparent;
+}
+.hero-copy { max-width:560px; color:var(--muted); font-size:16px; }
+.hero-actions { display:flex; gap:13px; flex-wrap:wrap; margin-top:32px; }
+.trust { display:flex; gap:25px; flex-wrap:wrap; margin-top:38px; color:var(--muted); font-size:12px; }
+.trust span::before { content:"✓"; color:var(--cyan); margin-right:8px; }
+
+.chip-scene {
+  position:relative; display:grid; place-items:center;
+  min-height:410px; perspective:800px;
+}
+.orbit {
+  position:absolute; width:310px; height:310px;
+  border:1px solid #45b8ff40; border-radius:50%;
+  animation:rotate 22s linear infinite;
+}
+.orbit::before {
+  content:""; position:absolute; width:10px;height:10px;
+  top:36px; left:45px; border-radius:50%;
+  background:var(--cyan); box-shadow:0 0 25px var(--cyan);
+}
+.orbit.two {
+  width:390px;height:390px;
+  border-style:dashed; opacity:.55;
+  animation-direction:reverse; animation-duration:35s;
+}
+.chip {
+  position:relative; width:205px;height:205px;
+  display:grid;place-items:center;text-align:center;
+  background:linear-gradient(145deg,#153d60,#081322);
+  border:1px solid #53caff99; border-radius:24px;
+  box-shadow:0 0 45px #1686f944,inset 0 0 35px #1686f922;
+  transform:rotate(-7deg);
+  animation:float 5s ease-in-out infinite;
+}
+.chip::before {
+  content:"";position:absolute;inset:-13px;
+  border:1px solid #36a3ff66;border-radius:29px;
+}
+.chip-icon { font-size:62px; line-height:1.2; }
+.chip strong { display:block; font-size:19px; letter-spacing:2px; }
+.chip small { color:var(--cyan);font-size:10px;letter-spacing:2px; }
+
+.section-tag { color:var(--cyan);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase; }
+.section-title {
+  font-size:clamp(30px,4vw,46px);letter-spacing:-1.7px;
+  line-height:1.2;margin:12px 0 17px;
+}
+.section-desc { color:var(--muted);max-width:650px;font-size:15px; }
+.center { text-align:center; }
+.center .section-desc { margin:0 auto; }
+
+.services { background:#091625; border-block:1px solid #ffffff08; }
+.cards {
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:19px;margin-top:45px;
+}
+.card {
+  position:relative;overflow:hidden;
+  background:linear-gradient(145deg,#102238,#0a1726);
+  border:1px solid var(--border);border-radius:16px;
+  padding:29px;transition:transform .3s,border-color .3s,box-shadow .3s;
+}
+.card::after {
+  content:"";position:absolute;top:0;left:-120%;
+  width:70%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+  transition:left .6s;
+}
+.card:hover {
+  transform:translateY(-8px);border-color:#36a3ff99;
+  box-shadow:0 18px 50px #0003;
+}
+.card:hover::after { left:130%; }
+.card-icon {
+  width:53px;height:53px;display:grid;place-items:center;
+  border-radius:13px;background:#1686f91b;
+  border:1px solid #36a3ff35;font-size:26px;margin-bottom:21px;
+}
+.card h3 { font-size:18px;margin-bottom:11px; }
+.card p { color:var(--muted);font-size:13px; }
+.card .learn { display:inline-block;margin-top:20px;color:var(--cyan);font-size:12px;font-weight:700; }
+
+.about-grid { display:grid;grid-template-columns:1fr 1fr;gap:65px;align-items:center; }
+.feature-list { list-style:none;margin-top:25px;display:grid;gap:14px; }
+.feature-list li { color:#cfdeee;font-size:14px; }
+.feature-list li::before { content:"✦";color:var(--cyan);margin-right:12px; }
+.about-panel {
+  padding:32px;border-radius:18px;
+  border:1px solid var(--border);
+  background:radial-gradient(circle at 100% 0%,#1263a933,transparent 48%),var(--panel);
+}
+.about-panel h3 { font-size:23px;margin-bottom:14px; }
+.about-panel p { color:var(--muted);font-size:14px; }
+.pills { display:flex;flex-wrap:wrap;gap:9px;margin-top:25px; }
+.pills span {
+  font-size:11px;color:#bfeaff;padding:8px 12px;
+  background:#36a3ff12;border:1px solid #36a3ff35;border-radius:6px;
+}
+
+.projects { background:#091625; }
+.project-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:42px; }
+.project {
+  border:1px solid var(--border);border-radius:16px;
+  padding:29px;background:linear-gradient(140deg,#10243a,#0a1625);
+  transition:.3s;
+}
+.project:hover { transform:translateY(-5px);border-color:var(--blue); }
+.project-label { font-size:11px;color:var(--cyan);letter-spacing:1.4px;text-transform:uppercase; }
+.project h3 { margin:12px 0;font-size:20px; }
+.project p { color:var(--muted);font-size:13px; }
+
+.contact-grid { display:grid;grid-template-columns:.8fr 1.2fr;gap:55px; }
+.contact-info { color:var(--muted);font-size:14px;margin-top:20px; }
+.contact-info a { color:var(--cyan);overflow-wrap:anywhere; }
+.contact-form {
+  background:var(--panel);border:1px solid var(--border);
+  border-radius:16px;padding:28px;
+}
+.field { margin-bottom:17px; }
+.field label { display:block;font-size:12px;color:#c4d4e6;margin-bottom:7px; }
+.field input,.field textarea,.field select {
+  width:100%;padding:13px 14px;background:#071321;
+  color:var(--text);border:1px solid #243d56;
+  border-radius:8px;outline:none;font:inherit;font-size:13px;
+}
+.field input:focus,.field textarea:focus,.field select:focus { border-color:var(--blue); }
+.field textarea { resize:vertical;min-height:125px; }
+.contact-form .btn { width:100%; }
+.form-note { color:var(--muted);font-size:11px;margin-top:12px; }
+
+footer { border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:12px; }
+.footer-inner { display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap; }
+
+.reveal { opacity:0;transform:translateY(25px);transition:opacity .7s ease,transform .7s ease; }
+.reveal.visible { opacity:1;transform:translateY(0); }
+
+@keyframes pulse { 50% { opacity:.45;box-shadow:0 0 4px var(--cyan); } }
+@keyframes rotate { to { transform:rotate(360deg); } }
+@keyframes float { 0%,100% { transform:translateY(0) rotate(-7deg); } 50% { transform:translateY(-14px) rotate(-3deg); } }
+
+@media(max-width:850px) {
+  .hero-grid,.about-grid,.contact-grid { grid-template-columns:1fr; }
+  .hero-grid { gap:15px; }
+  .hero { padding-top:130px; }
+  .chip-scene { min-height:360px; }
+  .cards { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .about-grid,.contact-grid { gap:30px; }
+  .nav-links {
+    display:none;position:absolute;top:76px;left:0;right:0;
+    padding:24px 5%;background:#07111f;
+    border-bottom:1px solid var(--border);
+    flex-direction:column;align-items:stretch;gap:18px;
+  }
+  .nav-links.open { display:flex; }
+  .menu-btn { display:block; }
+  .nav-cta { display:none; }
+}
+@media(max-width:540px) {
+  section { padding:75px 0; }
+  h1 { letter-spacing:-2.2px; }
+  .cards,.project-grid { grid-template-columns:1fr; }
+  .chip-scene { transform:scale(.85);margin:-20px 0; }
+  .trust { gap:12px; }
+  .card,.project { padding:23px; }
+  .contact-form { padding:20px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+    transition-duration:.01ms!important;
+  }
+  .reveal { opacity:1;transform:none; }
+}
+</style>
 </head>
 
 <body>
+<nav>
+  <div class="container nav-inner">
+    <a class="logo" href="#home">NANO<span>CIRCUIT</span> LABS</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#about">About Us</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="btn nav-cta" href="#contact">Let's Collaborate ↗</a>
+  </div>
+</nav>
 
-<!-- Loader -->
-<div id="loader"></div>
+<main>
+<section class="hero" id="home">
+  <div class="grid-bg"></div>
+  <div class="container hero-grid">
+    <div class="reveal">
+      <div class="eyebrow"><span class="dot"></span> ELECTRONICS · INNOVATION · ENGINEERING</div>
+      <h1>Engineering the<br><span class="gradient-text">Future of Electronics.</span></h1>
+      <p class="hero-copy">
+        Turning innovative ideas into intelligent electronic solutions.
+        Explore circuit design, embedded systems, PCB development and
+        next-generation engineering with Nano Circuit Labs.
+      </p>
+      <div class="hero-actions">
+        <a class="btn" href="#services">Explore Services ↗</a>
+        <a class="btn btn-outline" href="#projects">View Our Work</a>
+      </div>
+      <div class="trust">
+        <span>Innovation First</span>
+        <span>Engineering Focused</span>
+        <span>Future Ready</span>
+      </div>
+    </div>
 
-<!-- WhatsApp Button -->
-<a href="https://wa.me/919024520731" class="whatsapp" target="_blank">💬</a>
-
-<!-- Navbar -->
-<header>
-  <div class="logo">Nano Circuit Labs</div>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
-
-<!-- Hero -->
-<section id="home" class="hero">
-  <div class="hero-content" data-aos="fade-up">
-    <h1>Innovating Future Technology</h1>
-    <p>Semiconductor • Embedded Systems • Automation • IT Solutions</p>
-    <a href="#contact" class="btn">Get Started</a>
+    <div class="chip-scene reveal" aria-label="Animated semiconductor chip illustration">
+      <div class="orbit"></div>
+      <div class="orbit two"></div>
+      <div class="chip">
+        <div>
+          <div class="chip-icon">⌘</div>
+          <strong>NCL / 01</strong>
+          <small>DESIGN · BUILD · INNOVATE</small>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- About -->
-<section id="about" class="about" data-aos="fade-right">
-  <h2>About Us</h2>
-  <p>
-    Nano Circuit Labs is a research-driven engineering organization focused on 
-    semiconductor innovation, embedded systems, and industrial automation.
-  </p>
-</section>
-
-<!-- Services -->
-<section id="services" class="services">
-  <h2 data-aos="fade-up">Our Services</h2>
-
-  <div class="service-container">
-
-    <div class="card" data-aos="zoom-in">
-      <h3>Semiconductor Research</h3>
-      <p>Advanced chip design & silicon validation.</p>
+<section class="services" id="services">
+  <div class="container">
+    <div class="center reveal">
+      <div class="section-tag">What We Do</div>
+      <h2 class="section-title">Engineering Solutions That Matter</h2>
+      <p class="section-desc">From a circuit concept to a working prototype, explore our engineering capabilities.</p>
     </div>
-
-    <div class="card" data-aos="zoom-in">
-      <h3>Embedded Systems</h3>
-      <p>IoT & microcontroller based development.</p>
+    <div class="cards">
+      <article class="card reveal">
+        <div class="card-icon">⌘</div>
+        <h3>PCB Design & Development</h3>
+        <p>PCB layout, schematic development, design optimization and prototype support for electronic products.</p>
+        <a class="learn" href="#contact">Discuss a Project ↗</a>
+      </article>
+      <article class="card reveal">
+        <div class="card-icon">⌁</div>
+        <h3>Embedded Systems</h3>
+        <p>Microcontroller-based solutions, firmware development, hardware integration and system prototyping.</p>
+        <a class="learn" href="#contact">Discuss a Project ↗</a>
+      </article>
+      <article class="card reveal">
+        <div class="card-icon">⌬</div>
+        <h3>Semiconductor & VLSI</h3>
+        <p>Explore digital design, RTL concepts, verification workflows and semiconductor design projects.</p>
+        <a class="learn" href="#contact">Discuss a Project ↗</a>
+      </article>
+      <article class="card reveal">
+        <div class="card-icon">ϟ</div>
+        <h3>Circuit Design & Simulation</h3>
+        <p>Electronic circuit development, simulation, troubleshooting and performance-oriented design.</p>
+        <a class="learn" href="#contact">Discuss a Project ↗</a>
+      </article>
+      <article class="card reveal">
+        <div class="card-icon">◉</div>
+        <h3>IoT & Smart Systems</h3>
+        <p>Connected devices, sensor integration, automation and intelligent monitoring solutions.</p>
+        <a class="learn" href="#contact">Discuss a Project ↗</a>
+      </article>
+      <article class="card reveal">
+        <div class="card-icon">⌘</div>
+        <h3>Engineering Prototypes</h3>
+        <p>Concept development, proof-of-concept builds, technical documentation and iterative testing.</p>
+        <a class="learn" href="#contact">Discuss a Project ↗</a>
+      </article>
     </div>
-
-    <div class="card" data-aos="zoom-in">
-      <h3>Automation</h3>
-      <p>Industrial smart control systems.</p>
-    </div>
-
-    <div class="card" data-aos="zoom-in">
-      <h3>Web & IT</h3>
-      <p>Modern web apps & cloud solutions.</p>
-    </div>
-
   </div>
 </section>
 
-<!-- Contact -->
-<section id="contact" class="contact" data-aos="fade-left">
-  <h2>Contact Us</h2>
-
-  <p><strong>Mobile:</strong> 9024520731</p>
-  <p><strong>Email:</strong> kuldeepsinghgurjar2024@gmail.com</p>
-
-  <form action="https://formspree.io/f/xnjbwgqb" method="POST">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <textarea name="message" placeholder="Your Message" required></textarea>
-    <button type="submit">Send Message</button>
-  </form>
+<section id="about">
+  <div class="container about-grid">
+    <div class="reveal">
+      <div class="section-tag">About Nano Circuit Labs</div>
+      <h2 class="section-title">Ideas Into Intelligent Engineering.</h2>
+      <p class="section-desc">
+        We aim to bridge creativity and practical engineering through
+        electronics, embedded technologies and modern circuit development.
+        Our focus is on learning, experimentation and building solutions
+        around real-world needs.
+      </p>
+      <ul class="feature-list">
+        <li>Innovation-led engineering approach</li>
+        <li>Practical, project-oriented development</li>
+        <li>Focus on reliability and continuous improvement</li>
+        <li>Solutions designed around project requirements</li>
+      </ul>
+    </div>
+    <div class="about-panel reveal">
+      <div class="section-tag">Our Technical Focus</div>
+      <h3>Built Around Technology</h3>
+      <p>Explore our engineering interests and capabilities across modern electronics and connected systems.</p>
+      <div class="pills">
+        <span>PCB Design</span><span>Embedded C</span>
+        <span>Microcontrollers</span><span>IoT</span>
+        <span>VLSI</span><span>RTL Design</span>
+        <span>Circuit Simulation</span><span>Prototyping</span>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- Footer -->
+<section class="projects" id="projects">
+  <div class="container">
+    <div class="center reveal">
+      <div class="section-tag">Innovation In Action</div>
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-desc">A showcase area for electronic prototypes, smart systems and engineering experiments.</p>
+    </div>
+    <div class="project-grid">
+      <article class="project reveal">
+        <div class="project-label">Embedded Systems · AI</div>
+        <h3>Intelligent Traffic Management</h3>
+        <p>An AI-oriented traffic monitoring concept combining vehicle detection, embedded computing and adaptive traffic management.</p>
+      </article>
+      <article class="project reveal">
+        <div class="project-label">Electronics · PCB</div>
+        <h3>Custom PCB Development</h3>
+        <p>A project showcase for circuit schematics, board layouts, electronic prototyping and hardware testing.</p>
+      </article>
+      <article class="project reveal">
+        <div class="project-label">IoT · Automation</div>
+        <h3>Smart Monitoring System</h3>
+        <p>A connected-system concept using sensors and microcontrollers for data collection and intelligent monitoring.</p>
+      </article>
+      <article class="project reveal">
+        <div class="project-label">Semiconductor · Digital Design</div>
+        <h3>Digital Circuit Design</h3>
+        <p>A showcase for digital logic, RTL experiments and simulation-based electronic design.</p>
+      </article>
+    </div>
+    <p style="color:var(--muted);font-size:11px;margin-top:18px">
+      Note: Replace these sample project descriptions with your actual completed work and project links.
+    </p>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container contact-grid">
+    <div class="reveal">
+      <div class="section-tag">Get In Touch</div>
+      <h2 class="section-title">Let's Build Something Great.</h2>
+      <p class="section-desc">Have an electronics idea, prototype requirement or collaboration proposal? Tell us about it.</p>
+      <div class="contact-info">
+        <p style="margin-bottom:13px">✉ Email</p>
+        <!-- Replace with your real business email -->
+        <p><a href="mailto:YOUR_EMAIL@example.com">YOUR_EMAIL@example.com</a></p>
+        <p style="margin-top:24px">Project enquiries and engineering collaborations are welcome.</p>
+      </div>
+    </div>
+    <form class="contact-form reveal" id="contactForm">
+      <div class="field">
+        <label for="name">Your Name</label>
+        <input id="name" name="name" autocomplete="name" placeholder="Enter your name" required>
+      </div>
+      <div class="field">
+        <label for="email">Email Address</label>
+        <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+      </div>
+      <div class="field">
+        <label for="service">Service Required</label>
+        <select id="service" name="service" required>
+          <option value="">Select a service</option>
+          <option>PCB Design</option>
+          <option>Embedded Systems</option>
+          <option>Semiconductor / VLSI</option>
+          <option>Circuit Design</option>
+          <option>IoT Solutions</option>
+          <option>Other Project</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="message">Project Details</label>
+        <textarea id="message" name="message" placeholder="Tell us about your idea..." required></textarea>
+      </div>
+      <button class="btn" type="submit">Prepare Enquiry ↗</button>
+      <p class="form-note" id="formNote">This demo prepares an email in your default mail application. It does not send or store submissions itself.</p>
+    </form>
+  </div>
+</section>
+</main>
+
 <footer>
-  <p>© 2026 Nano Circuit Labs | Designed by Kuldeep Singh Gurjar</p>
+  <div class="container footer-inner">
+    <a class="logo" href="#home">NANO<span>CIRCUIT</span> LABS</a>
+    <p>© <span id="year"></span> Nano Circuit Labs. All rights reserved.</p>
+    <a href="#home">Back to top ↑</a>
+  </div>
 </footer>
 
-<!-- JS -->
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
-AOS.init();
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
 
-window.addEventListener("load", function(){
-  document.getElementById("loader").style.display = "none";
+menuBtn.addEventListener("click", () => {
+  const isOpen = navLinks.classList.toggle("open");
+  menuBtn.setAttribute("aria-expanded", String(isOpen));
+});
+
+document.querySelectorAll("#navLinks a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuBtn.setAttribute("aria-expanded", "false");
+  });
+});
+
+// Reveal sections as they enter the viewport.
+const revealItems = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealItems.forEach(item => observer.observe(item));
+} else {
+  revealItems.forEach(item => item.classList.add("visible"));
+}
+
+// Automatically update the copyright year.
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Email-based enquiry: replace the placeholder with your real email.
+document.getElementById("contactForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const businessEmail = "YOUR_EMAIL@example.com";
+
+  if (businessEmail === "YOUR_EMAIL@example.com") {
+    document.getElementById("formNote").textContent =
+      "Please replace YOUR_EMAIL@example.com in the code with your actual business email before using this form.";
+    return;
+  }
+
+  const data = new FormData(this);
+  const subject = encodeURIComponent("Nano Circuit Labs — Project Enquiry");
+  const body = encodeURIComponent(
+    "Name: " + data.get("name") + "\n" +
+    "Email: " + data.get("email") + "\n" +
+    "Service: " + data.get("service") + "\n\n" +
+    "Project details:\n" + data.get("message")
+  );
+
+  window.location.href =
+    "mailto:" + businessEmail + "?subject=" + subject + "&body=" + body;
 });
 </script>
-
 </body>
 </html>
